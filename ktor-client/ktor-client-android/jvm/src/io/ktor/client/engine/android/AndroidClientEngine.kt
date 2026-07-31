@@ -84,6 +84,8 @@ public class AndroidClientEngine(override val config: AndroidEngineConfig) : Htt
             outgoingContent.writeTo(outputStream, callContext)
         }
 
+        connection.disconnectOnCancellation(callContext)
+
         return connection.timeoutAwareConnection(data) { current ->
             val responseCode = current.responseCode
             val responseMessage = current.responseMessage
